@@ -1,0 +1,19 @@
+--En planeacion--
+
+1-. tiene un login que es para los prestadores y el administrador
+    dependiendo la cuenta mandara a menu o a configuracion
+
+2-. el prestador de servicio solo puede meter reportes
+
+3-. el administrador puede controlar todo, meter nuevos prestadores
+    ver los reportes, cambiar contraseñas
+
+--Falta--
+
+1-. tener un metodo de recuperacion de contraseñas
+
+2-. sumatoria de horas, 4 por dia
+
+3-. registrar forzosamente actividades de lo contrario no puede dar por
+    cumplidas las 4 horas
+
