@@ -7,21 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 
 public class configuracion extends javax.swing.JFrame {
 
     public configuracion() {
         initComponents();
+        
         conector();
         jRadioButtonAdmin.setSelected(true);
         jRadioButtonPrestador.setSelected(true);
@@ -101,6 +98,11 @@ public class configuracion extends javax.swing.JFrame {
         });
 
         jPasswordFieldConterseña_eliminar.setBackground(new java.awt.Color(237, 237, 237));
+        jPasswordFieldConterseña_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldConterseña_eliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelEliminarLayout = new javax.swing.GroupLayout(jPanelEliminar);
         jPanelEliminar.setLayout(jPanelEliminarLayout);
@@ -460,13 +462,13 @@ public class configuracion extends javax.swing.JFrame {
     }
 
     public boolean datosRepetidoSQL() {
-        String sentencia = "SELECT * FROM datos_prestadores";
+        String sentencia = "SELECT tipo_usuario FROM datos_prestadores";
         String busca;
         try {
             st = con.createStatement();
             ResultSet result = st.executeQuery(sentencia);
             while (result.next()) {
-                busca = result.getString(6);
+                busca = result.getString(1);
                 if ("1".equals(busca)) {
                     return true;
                 }
@@ -480,7 +482,7 @@ public class configuracion extends javax.swing.JFrame {
 
     public void mostrarCombobox() {
         jComboBoxUsuarios.addItem(jTextFieldUsuario.getText());
-        String palabra;
+        String usuario;
         String sql = "SELECT usuario FROM datos_prestadores";
         try {
             st = con.createStatement();
@@ -488,8 +490,8 @@ public class configuracion extends javax.swing.JFrame {
 
             while (result.next()) {
 
-                palabra = result.getString(2);
-                jComboBoxUsuarios.addItem(palabra);
+                usuario = result.getString(1);
+                jComboBoxUsuarios.addItem(usuario);
                 
             }
         } catch (SQLException ex) {
@@ -559,31 +561,12 @@ public class configuracion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jPasswordFieldConterseña_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldConterseña_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldConterseña_eliminarActionPerformed
 
-        /* Create and display the form */
+    public static void main(String args[]) {
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

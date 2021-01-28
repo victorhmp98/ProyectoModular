@@ -167,6 +167,9 @@
                   <Color blue="ed" green="ed" red="ed" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordFieldConterse&#xf1;a_eliminarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
