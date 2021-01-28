@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
 public class conexionSQL {
+
     // Declaramos los datos de conexion a la bd
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
@@ -12,6 +13,7 @@ public class conexionSQL {
     private static final String url = "jdbc:mysql://localhost:3306/modular";
     // Reseteamos a null la conexion a la bd
     Connection conectar = null;
+
     public Connection conexion() {
         try {
             Class.forName(driver);

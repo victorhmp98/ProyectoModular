@@ -1,8 +1,6 @@
 package newpackage;
 
 import com.mysql.jdbc.Connection;
-import java.awt.Component;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

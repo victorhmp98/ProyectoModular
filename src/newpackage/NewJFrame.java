@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static newpackage.configuracion.jPanelEliminar;
+import static newpackage.configuracion.jPanelRecuperacion;
+import static newpackage.configuracion.jPanelReportes;
 
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -17,10 +20,10 @@ public class NewJFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
-    
+
     conexionSQL conexion = new conexionSQL();
     Connection con = conexion.conexion();
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -140,48 +143,67 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void txtFieldnewframe_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldnewframe_UsuarioActionPerformed
         //SI EL USUARIO Y LA CONTRASEÑA ES DEL ADMIN ABRE CONFIGURACION 
-
     }//GEN-LAST:event_txtFieldnewframe_UsuarioActionPerformed
 
     public void validarUsuario() {
-        String admin;
         String usuario = txtFieldnewframe_Usuario.getText();
         String contraseña = jPasswordField_newframe_contraseña.getText();
-        
-        String consulta = "SELECT * FROM datos_prestadores "
+        String consulta_usuarios = "SELECT * FROM datos_prestadores "
                 + "WHERE usuario='" + usuario + "' and"
-                + " contrasena='" + contraseña + "'";
-        
-        int resultado;
+                + " contrasena='" + contraseña + "' and"
+                + " tipo_usuario='1'";
+        int resultado = 0;
         try {
-            
             Statement st = con.createStatement();
-            ResultSet result = st.executeQuery(consulta);
+            ResultSet result_usuarios = st.executeQuery(consulta_usuarios);
 
-            if (result.next()) {
+            if (result_usuarios.next()) {
                 resultado = 1;
                 if (resultado == 1) {
-                    //hacer_reporte open = new hacer_reporte();
                     configuracion abrir = new configuracion();
                     abrir.setVisible(true);
                     this.dispose();
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
             }
 
+            consulta_usuarios = "SELECT * FROM datos_prestadores "
+                    + "WHERE usuario='" + usuario + "' and"
+                    + " contrasena='" + contraseña + "'";
+            result_usuarios = st.executeQuery(consulta_usuarios);
+
+            if (result_usuarios.next()) {
+                
+                if (resultado == 0) {
+                    hacer_reporte open = new hacer_reporte();
+                    open.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                if (resultado == 0) {
+                    JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     private void crearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearUsuarioActionPerformed
         configuracion abrir = new configuracion();
         abrir.setVisible(true);
         this.setVisible(false);
+        for (Component component : jPanelEliminar.getComponents()) {
+            component.setEnabled(false);
+        }
+        for (Component component : jPanelReportes.getComponents()) {
+            component.setEnabled(false);
+        }
+        for (Component component : jPanelRecuperacion.getComponents()) {
+            component.setEnabled(false);
+        }
     }//GEN-LAST:event_crearUsuarioActionPerformed
 
     private void jPasswordField_newframe_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_newframe_contraseñaActionPerformed

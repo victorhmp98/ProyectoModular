@@ -4,6 +4,8 @@ public class hacer_reporte extends javax.swing.JFrame {
 
     public hacer_reporte() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
