@@ -17,11 +17,10 @@ public class NewJFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
-
-    Connection con;
-    Statement st;
-
-    @SuppressWarnings("unchecked")
+    
+    conexionSQL conexion = new conexionSQL();
+    Connection con = conexion.conexion();
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -146,34 +145,37 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtFieldnewframe_UsuarioActionPerformed
 
-    public int tipoUsuario() {
-        String sql = "SELECT * FROM datos_prestadores";
-        String usuario;
+    public void validarUsuario() {
         String admin;
+        String usuario = txtFieldnewframe_Usuario.getText();
+        String contraseña = jPasswordField_newframe_contraseña.getText();
+        
+        String consulta = "SELECT * FROM datos_prestadores "
+                + "WHERE usuario='" + usuario + "' and"
+                + " contrasena='" + contraseña + "'";
+        
+        int resultado;
         try {
-            st = con.createStatement();
-            ResultSet result = st.executeQuery(sql);
-            while (result.next()) {
-                usuario = result.getString(2);
-                if (usuario.equals(txtFieldnewframe_Usuario.getText())) {
-                    admin = result.getString(6);
-                    if (admin.equals("1")) {//EXISTE Y ES ADMIN
-                        return 1;
-                    } else if (result.last()) {
-                        if (admin.equals("0")) {//EXISTE PERO NO ES ADMIN
-                            return 0;
-                        }
-                    }
-                } else if (result.last()) {//NO EXISTE
-                    if (usuario.equals("")) {
-                        return -1;
-                    }
+            
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery(consulta);
+
+            if (result.next()) {
+                resultado = 1;
+                if (resultado == 1) {
+                    //hacer_reporte open = new hacer_reporte();
+                    configuracion abrir = new configuracion();
+                    abrir.setVisible(true);
+                    this.dispose();
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return -1;
+
     }
 
     private void crearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearUsuarioActionPerformed
@@ -183,27 +185,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_crearUsuarioActionPerformed
 
     private void jPasswordField_newframe_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_newframe_contraseñaActionPerformed
-        
+
     }//GEN-LAST:event_jPasswordField_newframe_contraseñaActionPerformed
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
-        hacer_reporte open = new hacer_reporte();
-        configuracion abrir = new configuracion();
-        tipoUsuario();
-        switch (tipoUsuario()) {
-            case 1:
-                //exite administrador
-                abrir.setVisible(true);
-                break;
-            case 0:
-                //abre para prestadores
-                open.setVisible(true);
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
-                break;
-        }
-        this.setVisible(false);
+        validarUsuario();
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
     public static void main(String args[]) {

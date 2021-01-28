@@ -18,8 +18,6 @@ public class configuracion extends javax.swing.JFrame {
 
     public configuracion() {
         initComponents();
-        
-        conector();
         jRadioButtonAdmin.setSelected(true);
         jRadioButtonPrestador.setSelected(true);
         this.setLocationRelativeTo(null);
@@ -413,36 +411,15 @@ public class configuracion extends javax.swing.JFrame {
     static Usuarios arreglos[] = new Usuarios[20];
     DefaultTableModel dtm;
     Object[] o = new Object[3];
-    Statement st;
     String dato[] = new String[6];
-    Connection con;
-    
-    // Declaramos los datos de conexion a la bd
-    private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String user = "root";
-    private static final String pass = "";
-    private static final String url = "jdbc:mysql://localhost:3306/modular";
+    conexionSQL conexion = new conexionSQL();
+    Connection con = conexion.conexion();
+    Statement st;
+
 
     private void jTextFieldUsuario_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuario_eliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUsuario_eliminarActionPerformed
-
-    public void conector() {
-        // Reseteamos a null la conexion a la bd
-        con = null;
-        try {
-            Class.forName(driver);
-            // Nos conectamos a la bd
-            con = (Connection) DriverManager.getConnection(url, user, pass);
-            // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
-            if (con != null) {
-                jLabelConexion.setText("Conexion establecida");
-            }
-        } // Si la conexion NO fue exitosa mostramos un mensaje de error
-        catch (ClassNotFoundException | SQLException e) {
-            jLabelConexion.setText("Error de conexion" + e);
-        }
-    }
 
     public void mostrarDatosPrestadoresTable() {
         String sql = "SELECT * FROM datos_prestadores";
@@ -492,7 +469,7 @@ public class configuracion extends javax.swing.JFrame {
 
                 usuario = result.getString(1);
                 jComboBoxUsuarios.addItem(usuario);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, ex);
@@ -502,7 +479,6 @@ public class configuracion extends javax.swing.JFrame {
 
 
     private void jButtonConfig_cuentas_crear_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfig_cuentas_crear_crearActionPerformed
-
 
         datosRepetidoSQL();
         boolean cuenta = false;
@@ -538,7 +514,6 @@ public class configuracion extends javax.swing.JFrame {
             dtm.addRow(o);
             mostrarCombobox();
 
-
         } catch (SQLException e) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -566,7 +541,7 @@ public class configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldConterseña_eliminarActionPerformed
 
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

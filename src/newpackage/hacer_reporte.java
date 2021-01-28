@@ -73,9 +73,6 @@ public class hacer_reporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {
-
-        
-        
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
