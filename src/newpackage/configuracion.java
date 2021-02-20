@@ -42,10 +42,11 @@ public class configuracion extends javax.swing.JFrame {
         jTableMostrar = new javax.swing.JTable();
         jComboBoxUsuarios = new javax.swing.JComboBox<>();
         jPanelRecuperacion = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextField_recuperacion_cuenta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        jButton_recuperacion_aceptar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabelmostrar_contraseña = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButtonConfig_cuentas_crear_crear = new javax.swing.JButton();
@@ -105,9 +106,9 @@ public class configuracion extends javax.swing.JFrame {
         jPanelEliminarLayout.setHorizontalGroup(
             jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEliminarLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
                 .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                        .addGap(61, 61, 61)
                         .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jTextFieldUsuario_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,14 +117,14 @@ public class configuracion extends javax.swing.JFrame {
                             .addComponent(Contraseña)
                             .addComponent(jPasswordFieldConterseña_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addGap(50, 50, 50)
                         .addComponent(jButtonEliminar)))
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         jPanelEliminarLayout.setVerticalGroup(
             jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(121, 121, 121)
                 .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(Contraseña))
@@ -133,7 +134,7 @@ public class configuracion extends javax.swing.JFrame {
                     .addComponent(jPasswordFieldConterseña_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(jButtonEliminar)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         jTabbedPaneDatos.addTab("Eliminar", jPanelEliminar);
@@ -186,14 +187,21 @@ public class configuracion extends javax.swing.JFrame {
 
         jPanelRecuperacion.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField7.setBackground(new java.awt.Color(237, 237, 237));
+        jTextField_recuperacion_cuenta.setBackground(new java.awt.Color(237, 237, 237));
 
         jLabel5.setText("Usuario:");
 
-        jButton5.setText("Aceptar");
+        jButton_recuperacion_aceptar.setText("Aceptar");
+        jButton_recuperacion_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_recuperacion_aceptarActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel10.setText("Ingresa el nombre de usuario para recuperar contraseña");
+        jLabel10.setText("Ingresa usuario para recuperar contraseña");
+
+        jLabelmostrar_contraseña.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanelRecuperacionLayout = new javax.swing.GroupLayout(jPanelRecuperacion);
         jPanelRecuperacion.setLayout(jPanelRecuperacionLayout);
@@ -205,25 +213,30 @@ public class configuracion extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addComponent(jLabel10))
                     .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
+                        .addGap(136, 136, 136)
                         .addGroup(jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(185, Short.MAX_VALUE))
+                            .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
+                                .addComponent(jTextField_recuperacion_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)
+                                .addComponent(jButton_recuperacion_aceptar))
+                            .addComponent(jLabelmostrar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanelRecuperacionLayout.setVerticalGroup(
             jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addGap(63, 63, 63)
+                .addGap(112, 112, 112)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_recuperacion_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_recuperacion_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addComponent(jLabelmostrar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabbedPaneDatos.addTab("Recuperación", jPanelRecuperacion);
@@ -397,7 +410,7 @@ public class configuracion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPaneDatos)
+                    .addComponent(jTabbedPaneDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -538,6 +551,30 @@ public class configuracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldConterseña_eliminarActionPerformed
 
+    public void recuperacionCuentas() {
+        String usuario = jTextField_recuperacion_cuenta.getText();
+        String sql = "SELECT * FROM datos_prestadores "
+                + "WHERE usuario='" + usuario + "'";
+        
+        try {
+            st = con.createStatement();
+            ResultSet result = st.executeQuery(sql);
+            
+            while (result.next()) {
+                
+                jLabelmostrar_contraseña.setText(dato[1] = result.getString(3));
+
+            }
+            //JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+        } catch (SQLException ex) {
+            Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void jButton_recuperacion_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_recuperacion_aceptarActionPerformed
+        recuperacionCuentas();
+    }//GEN-LAST:event_jButton_recuperacion_aceptarActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -561,9 +598,9 @@ public class configuracion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Contraseña;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton5;
     public static javax.swing.JButton jButtonConfig_cuentas_crear_crear;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButton_recuperacion_aceptar;
     private javax.swing.JComboBox<String> jComboBoxUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -577,6 +614,7 @@ public class configuracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelConexion;
+    private javax.swing.JLabel jLabelmostrar_contraseña;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     public static javax.swing.JPanel jPanelEliminar;
@@ -589,11 +627,11 @@ public class configuracion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTabbedPane jTabbedPaneDatos;
     private javax.swing.JTable jTableMostrar;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextFieldFecha_reg;
     private javax.swing.JTextField jTextFieldGeneracion;
     private javax.swing.JTextField jTextFieldNombre;
     public static javax.swing.JTextField jTextFieldUsuario;
     private javax.swing.JTextField jTextFieldUsuario_eliminar;
+    private javax.swing.JTextField jTextField_recuperacion_cuenta;
     // End of variables declaration//GEN-END:variables
 }
