@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,7 +23,7 @@ public class configuracion extends javax.swing.JFrame {
         this.setResizable(false);
         dtm = (DefaultTableModel) jTableMostrar.getModel();
         mostrarDatosPrestadoresTable();
-        mostrarCombobox();
+        mostrarListaUsuarios();
     }
 
     @SuppressWarnings("unchecked")
@@ -31,22 +32,23 @@ public class configuracion extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPaneDatos = new javax.swing.JTabbedPane();
-        jPanelEliminar = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        Contraseña = new javax.swing.JLabel();
-        jTextFieldUsuario_eliminar = new javax.swing.JTextField();
+        jPanelUsuarios = new javax.swing.JPanel();
+        jPanel_eliminar = new javax.swing.JPanel();
         jButtonEliminar = new javax.swing.JButton();
-        jPasswordFieldConterseña_eliminar = new javax.swing.JPasswordField();
+        jTextFieldUsuario_eliminar = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel_recuperar_contraseña = new javax.swing.JPanel();
+        jButton_recuperacion_aceptar = new javax.swing.JButton();
+        jTextField_recuperacion_cuenta = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabelmostrar_contraseña = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListMostrarUsuarios = new javax.swing.JList<>();
         jPanelReportes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMostrar = new javax.swing.JTable();
-        jComboBoxUsuarios = new javax.swing.JComboBox<>();
-        jPanelRecuperacion = new javax.swing.JPanel();
-        jTextField_recuperacion_cuenta = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jButton_recuperacion_aceptar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabelmostrar_contraseña = new javax.swing.JLabel();
+        jButtonEliminar_registros = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButtonConfig_cuentas_crear_crear = new javax.swing.JButton();
@@ -58,7 +60,6 @@ public class configuracion extends javax.swing.JFrame {
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldUsuario = new javax.swing.JTextField();
         jPasswordFieldContraseña = new javax.swing.JPasswordField();
-        jLabelConexion = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldFecha_reg = new javax.swing.JTextField();
         jTextFieldGeneracion = new javax.swing.JTextField();
@@ -74,11 +75,19 @@ public class configuracion extends javax.swing.JFrame {
 
         jTabbedPaneDatos.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanelEliminar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelUsuarios.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setText("Usuario:");
+        jPanel_eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_eliminar.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar:"));
+        jPanel_eliminar.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        Contraseña.setText("Contraseña:");
+        jButtonEliminar.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
+        jButtonEliminar.setText("Aceptar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
 
         jTextFieldUsuario_eliminar.setBackground(new java.awt.Color(237, 237, 237));
         jTextFieldUsuario_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,57 +96,136 @@ public class configuracion extends javax.swing.JFrame {
             }
         });
 
-        jButtonEliminar.setText("Aceptar");
-        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarActionPerformed(evt);
-            }
-        });
+        jLabel11.setText("Usuario:");
 
-        jPasswordFieldConterseña_eliminar.setBackground(new java.awt.Color(237, 237, 237));
-        jPasswordFieldConterseña_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordFieldConterseña_eliminarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelEliminarLayout = new javax.swing.GroupLayout(jPanelEliminar);
-        jPanelEliminar.setLayout(jPanelEliminarLayout);
-        jPanelEliminarLayout.setHorizontalGroup(
-            jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                        .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jTextFieldUsuario_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Contraseña)
-                            .addComponent(jPasswordFieldConterseña_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+        javax.swing.GroupLayout jPanel_eliminarLayout = new javax.swing.GroupLayout(jPanel_eliminar);
+        jPanel_eliminar.setLayout(jPanel_eliminarLayout);
+        jPanel_eliminarLayout.setHorizontalGroup(
+            jPanel_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_eliminarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_eliminarLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel_eliminarLayout.createSequentialGroup()
+                        .addComponent(jTextFieldUsuario_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                         .addComponent(jButtonEliminar)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanelEliminarLayout.setVerticalGroup(
-            jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEliminarLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(Contraseña))
+        jPanel_eliminarLayout.setVerticalGroup(
+            jPanel_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_eliminarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldUsuario_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordFieldConterseña_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jButtonEliminar)
-                .addContainerGap(147, Short.MAX_VALUE))
+                    .addComponent(jButtonEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPaneDatos.addTab("Eliminar", jPanelEliminar);
+        jPanel_recuperar_contraseña.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_recuperar_contraseña.setBorder(javax.swing.BorderFactory.createTitledBorder("Recuperar contraseña:"));
+        jPanel_recuperar_contraseña.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        jButton_recuperacion_aceptar.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
+        jButton_recuperacion_aceptar.setText("Aceptar");
+        jButton_recuperacion_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_recuperacion_aceptarActionPerformed(evt);
+            }
+        });
+
+        jTextField_recuperacion_cuenta.setBackground(new java.awt.Color(237, 237, 237));
+
+        jLabel6.setText("Usuario:");
+
+        javax.swing.GroupLayout jPanel_recuperar_contraseñaLayout = new javax.swing.GroupLayout(jPanel_recuperar_contraseña);
+        jPanel_recuperar_contraseña.setLayout(jPanel_recuperar_contraseñaLayout);
+        jPanel_recuperar_contraseñaLayout.setHorizontalGroup(
+            jPanel_recuperar_contraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_recuperar_contraseñaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_recuperar_contraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_recuperar_contraseñaLayout.createSequentialGroup()
+                        .addComponent(jTextField_recuperacion_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(jButton_recuperacion_aceptar))
+                    .addGroup(jPanel_recuperar_contraseñaLayout.createSequentialGroup()
+                        .addGroup(jPanel_recuperar_contraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabelmostrar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel_recuperar_contraseñaLayout.setVerticalGroup(
+            jPanel_recuperar_contraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_recuperar_contraseñaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_recuperar_contraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_recuperacion_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_recuperacion_aceptar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelmostrar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Usuarios"));
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        jListMostrarUsuarios.setBackground(new java.awt.Color(237, 237, 237));
+        jScrollPane2.setViewportView(jListMostrarUsuarios);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelUsuariosLayout = new javax.swing.GroupLayout(jPanelUsuarios);
+        jPanelUsuarios.setLayout(jPanelUsuariosLayout);
+        jPanelUsuariosLayout.setHorizontalGroup(
+            jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_recuperar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanelUsuariosLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelUsuariosLayout.setVerticalGroup(
+            jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel_recuperar_contraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jPanel_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPaneDatos.addTab("Usuarios", jPanelUsuarios);
 
         jPanelReportes.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -160,86 +248,37 @@ public class configuracion extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableMostrar);
 
+        jButtonEliminar_registros.setText("Eliminar");
+        jButtonEliminar_registros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminar_registrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelReportesLayout = new javax.swing.GroupLayout(jPanelReportes);
         jPanelReportes.setLayout(jPanelReportesLayout);
         jPanelReportesLayout.setHorizontalGroup(
             jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanelReportesLayout.createSequentialGroup()
-                .addGap(198, 198, 198)
-                .addComponent(jComboBoxUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonEliminar_registros)))
+                .addContainerGap())
         );
         jPanelReportesLayout.setVerticalGroup(
             jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelReportesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBoxUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jButtonEliminar_registros)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jTabbedPaneDatos.addTab("Reportes", jPanelReportes);
-
-        jPanelRecuperacion.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTextField_recuperacion_cuenta.setBackground(new java.awt.Color(237, 237, 237));
-
-        jLabel5.setText("Usuario:");
-
-        jButton_recuperacion_aceptar.setText("Aceptar");
-        jButton_recuperacion_aceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_recuperacion_aceptarActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel10.setText("Ingresa usuario para recuperar contraseña");
-
-        jLabelmostrar_contraseña.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        javax.swing.GroupLayout jPanelRecuperacionLayout = new javax.swing.GroupLayout(jPanelRecuperacion);
-        jPanelRecuperacion.setLayout(jPanelRecuperacionLayout);
-        jPanelRecuperacionLayout.setHorizontalGroup(
-            jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
-                .addGroup(jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel10))
-                    .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addGroup(jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
-                                .addComponent(jTextField_recuperacion_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(107, 107, 107)
-                                .addComponent(jButton_recuperacion_aceptar))
-                            .addComponent(jLabelmostrar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(132, Short.MAX_VALUE))
-        );
-        jPanelRecuperacionLayout.setVerticalGroup(
-            jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRecuperacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addGap(112, 112, 112)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelRecuperacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_recuperacion_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_recuperacion_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabelmostrar_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
-        );
-
-        jTabbedPaneDatos.addTab("Recuperación", jPanelRecuperacion);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -268,9 +307,6 @@ public class configuracion extends javax.swing.JFrame {
         jTextFieldUsuario.setBackground(new java.awt.Color(237, 237, 237));
 
         jPasswordFieldContraseña.setBackground(new java.awt.Color(237, 237, 237));
-
-        jLabelConexion.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        jLabelConexion.setText("Estado");
 
         jLabel1.setText("yyyy-mm-dd");
 
@@ -319,28 +355,23 @@ public class configuracion extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabelConexion))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldUsuario)
-                                        .addComponent(jPasswordFieldContraseña)
-                                        .addComponent(jTextFieldFecha_reg)
-                                        .addComponent(jTextFieldGeneracion)
-                                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldUsuario)
+                                .addComponent(jPasswordFieldContraseña)
+                                .addComponent(jTextFieldFecha_reg)
+                                .addComponent(jTextFieldGeneracion)
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 77, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
@@ -389,9 +420,7 @@ public class configuracion extends javax.swing.JFrame {
                     .addComponent(jPasswordFieldContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConfig_cuentas_crear_crear)
-                .addGap(4, 4, 4)
-                .addComponent(jLabelConexion)
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -426,22 +455,20 @@ public class configuracion extends javax.swing.JFrame {
     conexionSQL conexion = new conexionSQL();
     Connection con = conexion.conexion();
     Statement st;
-
-
-    private void jTextFieldUsuario_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuario_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUsuario_eliminarActionPerformed
-
+    PreparedStatement pps;
+    ResultSet result;
+    
+    
     public void mostrarDatosPrestadoresTable() {
-        String sql = "SELECT * FROM datos_prestadores";
+        String sql = "SELECT * FROM reportes";
         try {
             st = con.createStatement();
-            ResultSet result = st.executeQuery(sql);
+            result = st.executeQuery(sql);
 
             while (result.next()) {
-                dato[0] = result.getString(5);
-                dato[1] = result.getString(2);
-
+                dato[0] = result.getString(2);
+                dato[1] = result.getString(1);
+                dato[2] = result.getString(3);
                 dtm.addRow(dato);
             }
         } catch (SQLException ex) {
@@ -454,7 +481,7 @@ public class configuracion extends javax.swing.JFrame {
         String busca;
         try {
             st = con.createStatement();
-            ResultSet result = st.executeQuery(sentencia);
+            result = st.executeQuery(sentencia);
             while (result.next()) {
                 busca = result.getString(1);
                 if ("1".equals(busca)) {
@@ -466,26 +493,6 @@ public class configuracion extends javax.swing.JFrame {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
-    }
-
-    public void mostrarCombobox() {
-        jComboBoxUsuarios.addItem(jTextFieldUsuario.getText());
-        String usuario;
-        String sql = "SELECT usuario FROM datos_prestadores";
-        try {
-            st = con.createStatement();
-            ResultSet result = st.executeQuery(sql);
-
-            while (result.next()) {
-
-                usuario = result.getString(1);
-                jComboBoxUsuarios.addItem(usuario);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 
@@ -521,21 +528,23 @@ public class configuracion extends javax.swing.JFrame {
             o[0] = jTextFieldFecha_reg.getText();
             o[1] = jTextFieldUsuario.getText();
             o[2] = "prueba";//va el reporte del prestador de servicio
-
             dtm.addRow(o);
-            mostrarCombobox();
 
         } catch (SQLException e) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jButtonConfig_cuentas_crear_crearActionPerformed
 
+    private void jButtonEliminar_registrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminar_registrosActionPerformed
+        eliminarRegistros();
+    }//GEN-LAST:event_jButtonEliminar_registrosActionPerformed
+
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         String usuario = jTextFieldUsuario_eliminar.getText();
         String eliminarUsuario = "DELETE FROM datos_prestadores WHERE usuario='" + usuario + "'";
         int respuesta = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este usuario " + usuario + "?");
         try {
-            PreparedStatement pps = con.prepareStatement(eliminarUsuario);
+            pps = con.prepareStatement(eliminarUsuario);
             if (respuesta == JOptionPane.YES_OPTION) {
                 pps.execute();
                 JOptionPane.showMessageDialog(null, "Usuario Eliminado");
@@ -544,26 +553,25 @@ public class configuracion extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jPasswordFieldConterseña_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldConterseña_eliminarActionPerformed
+    private void jTextFieldUsuario_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuario_eliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldConterseña_eliminarActionPerformed
+    }//GEN-LAST:event_jTextFieldUsuario_eliminarActionPerformed
+
+    private void jButton_recuperacion_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_recuperacion_aceptarActionPerformed
+        recuperacionCuentas();
+    }//GEN-LAST:event_jButton_recuperacion_aceptarActionPerformed
 
     public void recuperacionCuentas() {
         String usuario = jTextField_recuperacion_cuenta.getText();
         String sql = "SELECT * FROM datos_prestadores "
                 + "WHERE usuario='" + usuario + "'";
-        
         try {
             st = con.createStatement();
-            ResultSet result = st.executeQuery(sql);
-            
+            result = st.executeQuery(sql);
             while (result.next()) {
-                
                 jLabelmostrar_contraseña.setText(dato[1] = result.getString(3));
-
             }
             //JOptionPane.showMessageDialog(null, "Usuario no encontrado");
         } catch (SQLException ex) {
@@ -571,9 +579,41 @@ public class configuracion extends javax.swing.JFrame {
         }
     }
 
-    private void jButton_recuperacion_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_recuperacion_aceptarActionPerformed
-        recuperacionCuentas();
-    }//GEN-LAST:event_jButton_recuperacion_aceptarActionPerformed
+    public void eliminarRegistros() {
+        String eliminar_registros = "DELETE FROM reportes";
+
+        try {
+
+            int respuesta = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar todos los registros?");
+            if (respuesta == JOptionPane.YES_OPTION) {
+                pps = con.prepareStatement(eliminar_registros);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Registros Eliminados");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    public void mostrarListaUsuarios() {
+        DefaultListModel modelo = new DefaultListModel();
+        jListMostrarUsuarios.setModel(modelo);
+        String traer_usuarios = "SELECT usuario FROM datos_prestadores";
+        String usuario;
+        try {
+            st = con.createStatement();
+            result = st.executeQuery(traer_usuarios);
+            while(result.next()){
+                usuario = result.getString(1);
+                modelo.addElement(usuario);
+            }
+            
+        } catch (SQLException e) {
+            Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
 
     public static void main(String args[]) {
 
@@ -596,14 +636,12 @@ public class configuracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Contraseña;
     private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JButton jButtonConfig_cuentas_crear_crear;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonEliminar_registros;
     private javax.swing.JButton jButton_recuperacion_aceptar;
-    private javax.swing.JComboBox<String> jComboBoxUsuarios;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -612,19 +650,21 @@ public class configuracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelConexion;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelmostrar_contraseña;
+    public static javax.swing.JList<String> jListMostrarUsuarios;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    public static javax.swing.JPanel jPanelEliminar;
-    public static javax.swing.JPanel jPanelRecuperacion;
     public static javax.swing.JPanel jPanelReportes;
-    private javax.swing.JPasswordField jPasswordFieldConterseña_eliminar;
+    public static javax.swing.JPanel jPanelUsuarios;
+    public static javax.swing.JPanel jPanel_eliminar;
+    public static javax.swing.JPanel jPanel_recuperar_contraseña;
     private javax.swing.JPasswordField jPasswordFieldContraseña;
     public static javax.swing.JRadioButton jRadioButtonAdmin;
     private javax.swing.JRadioButton jRadioButtonPrestador;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTabbedPane jTabbedPaneDatos;
     private javax.swing.JTable jTableMostrar;
     private javax.swing.JTextField jTextFieldFecha_reg;

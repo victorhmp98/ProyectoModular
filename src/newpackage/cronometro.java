@@ -10,7 +10,6 @@ public class cronometro {
             for (int horas = 4; horas > 0; horas--) {
                 for (int minutos = 59; minutos >= 0; minutos--) {
                     System.out.println("Tiempo restante:" + horas + ":" + minutos);
-
                     Thread.sleep(1000);
                 }
             }

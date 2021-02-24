@@ -8,9 +8,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static newpackage.configuracion.jPanelEliminar;
-import static newpackage.configuracion.jPanelRecuperacion;
-import static newpackage.configuracion.jPanelReportes;
 
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -23,7 +20,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     conexionSQL conexion = new conexionSQL();
     Connection con = conexion.conexion();
-
+    static String usuario;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -149,7 +146,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFieldnewframe_UsuarioActionPerformed
 
     public void validarUsuario() {
-        String usuario = txtFieldnewframe_Usuario.getText();
+        usuario = txtFieldnewframe_Usuario.getText();
         String contraseña = jPasswordField_newframe_contraseña.getText();
         String consulta_usuarios = "SELECT * FROM datos_prestadores "
                 + "WHERE usuario='" + usuario + "' and"
@@ -175,7 +172,7 @@ public class NewJFrame extends javax.swing.JFrame {
             result_usuarios = st.executeQuery(consulta_usuarios);
 
             if (result_usuarios.next()) {
-                
+
                 if (resultado == 0) {
                     hacer_reporte open = new hacer_reporte();
                     open.setVisible(true);
@@ -183,7 +180,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             } else {
                 if (resultado == 0) {
-                    JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta");
                 }
             }
         } catch (SQLException ex) {
@@ -195,13 +192,16 @@ public class NewJFrame extends javax.swing.JFrame {
         configuracion abrir = new configuracion();
         abrir.setVisible(true);
         this.setVisible(false);
-        for (Component component : jPanelEliminar.getComponents()) {
+        for (Component component : configuracion.jPanel_eliminar.getComponents()) {
             component.setEnabled(false);
         }
-        for (Component component : jPanelReportes.getComponents()) {
+        for (Component component : configuracion.jPanelReportes.getComponents()) {
             component.setEnabled(false);
         }
-        for (Component component : jPanelRecuperacion.getComponents()) {
+        for (Component component : configuracion.jPanel_recuperar_contraseña.getComponents()) {
+            component.setEnabled(false);
+        }
+        for(Component component : configuracion.jPanelUsuarios.getComponents()){
             component.setEnabled(false);
         }
     }//GEN-LAST:event_crearUsuarioActionPerformed
