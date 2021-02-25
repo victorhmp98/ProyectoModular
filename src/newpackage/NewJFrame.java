@@ -165,7 +165,6 @@ public class NewJFrame extends javax.swing.JFrame {
                     this.dispose();
                 }
             }
-
             consulta_usuarios = "SELECT * FROM datos_prestadores "
                     + "WHERE usuario='" + usuario + "' and"
                     + " contrasena='" + contraseña + "'";
@@ -201,7 +200,7 @@ public class NewJFrame extends javax.swing.JFrame {
         for (Component component : configuracion.jPanel_recuperar_contraseña.getComponents()) {
             component.setEnabled(false);
         }
-        for(Component component : configuracion.jPanelUsuarios.getComponents()){
+        for (Component component : configuracion.jPanelUsuarios.getComponents()) {
             component.setEnabled(false);
         }
     }//GEN-LAST:event_crearUsuarioActionPerformed

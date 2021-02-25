@@ -457,8 +457,7 @@ public class configuracion extends javax.swing.JFrame {
     Statement st;
     PreparedStatement pps;
     ResultSet result;
-    
-    
+
     public void mostrarDatosPrestadoresTable() {
         String sql = "SELECT * FROM reportes";
         try {
@@ -497,7 +496,6 @@ public class configuracion extends javax.swing.JFrame {
 
 
     private void jButtonConfig_cuentas_crear_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfig_cuentas_crear_crearActionPerformed
-
         datosRepetidoSQL();
         boolean cuenta = false;
         try {
@@ -531,6 +529,7 @@ public class configuracion extends javax.swing.JFrame {
             dtm.addRow(o);
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Formato Incorrecto, vuelva a intentar");
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jButtonConfig_cuentas_crear_crearActionPerformed
@@ -581,7 +580,6 @@ public class configuracion extends javax.swing.JFrame {
 
     public void eliminarRegistros() {
         String eliminar_registros = "DELETE FROM reportes";
-
         try {
 
             int respuesta = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar todos los registros?");
@@ -604,11 +602,11 @@ public class configuracion extends javax.swing.JFrame {
         try {
             st = con.createStatement();
             result = st.executeQuery(traer_usuarios);
-            while(result.next()){
+            while (result.next()) {
                 usuario = result.getString(1);
                 modelo.addElement(usuario);
             }
-            
+
         } catch (SQLException e) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
         }

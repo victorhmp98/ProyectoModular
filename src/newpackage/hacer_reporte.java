@@ -120,9 +120,7 @@ public class hacer_reporte extends javax.swing.JFrame {
     String usuario = NewJFrame.usuario;
 
     public void reportes() {
-
         try {
-
             pps = con.prepareStatement("INSERT INTO reportes(usuario,fecha,reporte) VALUES(?,?,?)");
             pps.setString(1, usuario);
             pps.setString(2, jTextFieldFecha.getText());
@@ -132,7 +130,6 @@ public class hacer_reporte extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(configuracion.class.getName()).log(Level.SEVERE, null, e);
         }
-
     }
 
 
