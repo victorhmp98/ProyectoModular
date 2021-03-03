@@ -1,23 +1,31 @@
 package newpackage;
 
+import java.time.LocalDateTime;
+
 public class cronometro {
 
-    public void tiempoRestante() {
-    }
+    public boolean delaySegundo() {
+        boolean listo = false;
 
-    public static void delaySegundo() {
-        try {
-            for (int horas = 4; horas > 0; horas--) {
-                for (int minutos = 59; minutos >= 0; minutos--) {
-                    System.out.println("Tiempo restante:" + horas + ":" + minutos);
-                    Thread.sleep(1000);
-                }
-            }
-        } catch (InterruptedException e) {
+        LocalDateTime tiempo = LocalDateTime.now();
+        int hora = tiempo.getHour();
+        int minutos = tiempo.getMinute();
+        int segundos = tiempo.getSecond();
+        
+        int minComparar = minutos;
+        
+        
+        System.out.println("la hora es: " + hora + ":" + minutos + ":" + segundos);
+        System.out.println(minComparar);
+        if (minutos == minComparar + 1) {
+            System.out.println("entro");
+            return listo = true;
         }
+        return listo;
     }
 
     public static void main(String[] args) {
-        delaySegundo();
+        cronometro cro = new cronometro();
+        cro.delaySegundo();
     }
 }

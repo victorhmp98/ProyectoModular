@@ -73,7 +73,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jLabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servicio-social.png"))); // NOI18N
-        jLabelImagen.setPreferredSize(new java.awt.Dimension(3301, 875));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
