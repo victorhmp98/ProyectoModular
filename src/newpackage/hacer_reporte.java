@@ -1,16 +1,29 @@
 package newpackage;
 
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class hacer_reporte extends javax.swing.JFrame {
 
+public class hacer_reporte extends javax.swing.JFrame {
+    
+    conexionSQL conexion = new conexionSQL();
+    Connection con = conexion.conexion();
+    Statement st;
+    String dato[] = new String[3];
+    PreparedStatement pps;
+    String usuario = NewJFrame.usuario;
+    ImageIcon imagenicon;
+    TrayIcon trayicon;
+    SystemTray systemtray;
+    
     public hacer_reporte() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -18,12 +31,17 @@ public class hacer_reporte extends javax.swing.JFrame {
         jLabelMostrarUsuario.setText("Bienvenido(a) " + usuario);
         //cronometro crono = new cronometro();
         //crono.delaySegundo();
+        imagenicon = new ImageIcon(this.getClass().getResource("/imagenes/servicio-social-icono.jpg"));
+        this.setIconImage(imagenicon.getImage());
+        trayIcon();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popup = new java.awt.PopupMenu();
+        sesion = new java.awt.MenuItem();
         jPanelCrearReporte = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelMostrarUsuario = new javax.swing.JLabel();
@@ -33,7 +51,27 @@ public class hacer_reporte extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
+        popup.setLabel("Menú");
+        popup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popupActionPerformed(evt);
+            }
+        });
+
+        sesion.setLabel("Sesión");
+        sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sesionActionPerformed(evt);
+            }
+        });
+        popup.add(sesion);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanelCrearReporte.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,13 +160,12 @@ public class hacer_reporte extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    conexionSQL conexion = new conexionSQL();
-    Connection con = conexion.conexion();
-    Statement st;
-    String dato[] = new String[3];
-    PreparedStatement pps;
-    String usuario = NewJFrame.usuario;
-
+    public void trayIcon() {
+        trayicon = new TrayIcon(imagenicon.getImage(), "Tooltip de Icono", popup);
+        trayicon.setImageAutoSize(true);
+        systemtray = SystemTray.getSystemTray();
+    }
+    
     public void reportes() {
         try {
             pps = con.prepareStatement("INSERT INTO reportes(usuario,fecha,reporte) VALUES(?,?,?)");
@@ -148,6 +185,26 @@ public class hacer_reporte extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonGuardarReportesActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            systemtray.add(trayicon);
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sesionActionPerformed
+        systemtray.remove(trayicon);
+        //this.setVisible(true);
+        NewJFrame abrir = new NewJFrame();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_sesionActionPerformed
+
+    private void popupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_popupActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -166,5 +223,7 @@ public class hacer_reporte extends javax.swing.JFrame {
     public static javax.swing.JPanel jPanelCrearReporte;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextAreaReporte;
+    private java.awt.PopupMenu popup;
+    private java.awt.MenuItem sesion;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,28 +2,41 @@ package newpackage;
 
 import com.mysql.jdbc.Connection;
 import java.awt.Component;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class NewJFrame extends javax.swing.JFrame {
+
+    conexionSQL conexion = new conexionSQL();
+    Connection con = conexion.conexion();
+    static String usuario;
+    ImageIcon imagenicon;
+    TrayIcon trayicon;
+    SystemTray systemtray;
 
     public NewJFrame() {
         initComponents();
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabelImagen, "src/imagenes/servicio-social.png");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        imagenicon = new ImageIcon(this.getClass().getResource("/imagenes/servicio-social-icono.jpg"));
+        this.setIconImage(imagenicon.getImage());
+        trayIcon();
+
     }
 
-    conexionSQL conexion = new conexionSQL();
-    Connection con = conexion.conexion();
-    static String usuario;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popup = new java.awt.PopupMenu();
+        sesion = new java.awt.MenuItem();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtFieldnewframe_Usuario = new javax.swing.JTextField();
@@ -35,9 +48,24 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonIngresar = new javax.swing.JButton();
         jLabelImagen = new javax.swing.JLabel();
 
+        popup.setLabel("Menú");
+
+        sesion.setLabel("Sesión");
+        sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sesionActionPerformed(evt);
+            }
+        });
+        popup.add(sesion);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Biracora");
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Usuario:");
@@ -138,7 +166,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void trayIcon() {
+        trayicon = new TrayIcon(imagenicon.getImage(), "Tooltip de Icono", popup);
+        trayicon.setImageAutoSize(true);
+        systemtray = SystemTray.getSystemTray();
+    }
 
     private void txtFieldnewframe_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldnewframe_UsuarioActionPerformed
         //SI EL USUARIO Y LA CONTRASEÑA ES DEL ADMIN ABRE CONFIGURACION 
@@ -212,9 +244,24 @@ public class NewJFrame extends javax.swing.JFrame {
         validarUsuario();
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            systemtray.add(trayicon);
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sesionActionPerformed
+        systemtray.remove(trayicon);
+        this.setVisible(true);
+    }//GEN-LAST:event_sesionActionPerformed
+
     public static void main(String args[]) {
 
         try {
+
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -250,6 +297,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JPasswordField jPasswordField_newframe_contraseña;
+    private java.awt.PopupMenu popup;
+    private java.awt.MenuItem sesion;
     private javax.swing.JTextField txtFieldnewframe_Usuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,8 @@
 package newpackage;
 
 import com.mysql.jdbc.Connection;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -15,6 +18,20 @@ import javax.swing.table.DefaultTableModel;
 
 public class configuracion extends javax.swing.JFrame {
 
+    NewJFrame frame = new NewJFrame();
+    static Usuarios arreglos[] = new Usuarios[20];
+    DefaultTableModel dtm;
+    Object[] o = new Object[3];
+    String dato[] = new String[6];
+    conexionSQL conexion = new conexionSQL();
+    Connection con = conexion.conexion();
+    Statement st;
+    PreparedStatement pps;
+    ResultSet result;
+    ImageIcon imagenicon;
+    TrayIcon trayicon;
+    SystemTray systemtray;
+    
     public configuracion() {
         initComponents();
         jRadioButtonAdmin.setSelected(true);
@@ -24,6 +41,9 @@ public class configuracion extends javax.swing.JFrame {
         dtm = (DefaultTableModel) jTableMostrar.getModel();
         mostrarDatosPrestadoresTable();
         mostrarListaUsuarios();
+        imagenicon = new ImageIcon(this.getClass().getResource("/imagenes/servicio-social-icono.jpg"));
+        this.setIconImage(imagenicon.getImage());
+        trayIcon();
     }
 
     @SuppressWarnings("unchecked")
@@ -31,6 +51,8 @@ public class configuracion extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        popup = new java.awt.PopupMenu();
+        sesion = new java.awt.MenuItem();
         jTabbedPaneDatos = new javax.swing.JTabbedPane();
         jPanelUsuarios = new javax.swing.JPanel();
         jPanel_eliminar = new javax.swing.JPanel();
@@ -67,10 +89,30 @@ public class configuracion extends javax.swing.JFrame {
         jFormattedTextFieldFechaRegistro = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
+        popup.setLabel("Menú");
+        popup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popupActionPerformed(evt);
+            }
+        });
+
+        sesion.setLabel("Sesión");
+        sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sesionActionPerformed(evt);
+            }
+        });
+        popup.add(sesion);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configuración");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPaneDatos.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -452,17 +494,12 @@ public class configuracion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    NewJFrame frame = new NewJFrame();
-    static Usuarios arreglos[] = new Usuarios[20];
-    DefaultTableModel dtm;
-    Object[] o = new Object[3];
-    String dato[] = new String[6];
-    conexionSQL conexion = new conexionSQL();
-    Connection con = conexion.conexion();
-    Statement st;
-    PreparedStatement pps;
-    ResultSet result;
-
+    public void trayIcon() {
+        trayicon = new TrayIcon(imagenicon.getImage(), "Tooltip de Icono", popup);
+        trayicon.setImageAutoSize(true);
+        systemtray = SystemTray.getSystemTray();
+    }
+    
     public void mostrarDatosPrestadoresTable() {
         String sql = "SELECT * FROM reportes";
         try {
@@ -566,6 +603,26 @@ public class configuracion extends javax.swing.JFrame {
     private void jButton_recuperacion_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_recuperacion_aceptarActionPerformed
         recuperacionCuentas();
     }//GEN-LAST:event_jButton_recuperacion_aceptarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            systemtray.add(trayicon);
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sesionActionPerformed
+        systemtray.remove(trayicon);
+        //this.setVisible(true);
+        NewJFrame abrir = new NewJFrame();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_sesionActionPerformed
+
+    private void popupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_popupActionPerformed
 
     public void recuperacionCuentas() {
         String usuario = jTextField_recuperacion_cuenta.getText();
@@ -673,8 +730,10 @@ public class configuracion extends javax.swing.JFrame {
     public static javax.swing.JTabbedPane jTabbedPaneDatos;
     private javax.swing.JTable jTableMostrar;
     private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldUsuario;
+    public static javax.swing.JTextField jTextFieldUsuario;
     private javax.swing.JTextField jTextFieldUsuario_eliminar;
     private javax.swing.JTextField jTextField_recuperacion_cuenta;
+    private java.awt.PopupMenu popup;
+    private java.awt.MenuItem sesion;
     // End of variables declaration//GEN-END:variables
 }
